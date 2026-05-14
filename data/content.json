@@ -9,7 +9,50 @@
     "heroImage": "https://images.unsplash.com/photo-1495121605193-b116b5b9c5d9?auto=format&fit=crop&w=1200&q=80",
     "heroAlt": "Elegant designer saree collection hero image"
   },
-  "collections": [],
+  "collections": [
+    {
+      "id": "designer-sarees",
+      "title": "Designer Sarees",
+      "description": "Premium designer sarees for weddings, festivals, puja functions, receptions, and family celebrations.",
+      "image": "https://images.unsplash.com/photo-1495121605193-b116b5b9c5d9?auto=format&fit=crop&w=1000&q=80",
+      "alt": "Designer saree collection by Anjali Boutique"
+    },
+    {
+      "id": "bridal-sarees",
+      "title": "Bridal Sarees",
+      "description": "Elegant bridal sarees with rich colors, festive styling, and graceful drapes for special wedding moments.",
+      "image": "https://images.unsplash.com/photo-1520975911200-58fb9e158b4f?auto=format&fit=crop&w=1000&q=80",
+      "alt": "Bridal saree collection for wedding shopping"
+    },
+    {
+      "id": "party-wear",
+      "title": "Party Wear",
+      "description": "Stylish party wear sarees, ethnic outfits, and celebration-ready looks for birthdays and receptions.",
+      "image": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1000&q=80",
+      "alt": "Party wear collection for women"
+    },
+    {
+      "id": "casual-ethnic-wear",
+      "title": "Casual Ethnic Wear",
+      "description": "Comfortable everyday ethnic wear with breathable fabrics, simple styling, and boutique finishing.",
+      "image": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=80",
+      "alt": "Casual ethnic wear collection"
+    },
+    {
+      "id": "plus-size-collection",
+      "title": "Plus Size Collection",
+      "description": "Flattering plus-size boutique outfits designed for comfort, confidence, and elegant occasion wear.",
+      "image": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1000&q=80",
+      "alt": "Plus size ethnic wear collection"
+    },
+    {
+      "id": "boutique-accessories",
+      "title": "Boutique Accessories",
+      "description": "Matching accessories, styling add-ons, and finishing touches for sarees, party wear, and festive outfits.",
+      "image": "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1000&q=80",
+      "alt": "Boutique accessories for ethnic outfits"
+    }
+  ],
   "testimonials": [
     {
       "rating": 5,
@@ -55,7 +98,96 @@
       "answer": "Yes, we offer stylish and comfortable plus-size fashion collections designed to celebrate every body type."
     }
   ],
-  "blogPosts": [],
+  "blogPosts": [
+    {
+      "title": "Best Saree Designs for Weddings in 2026",
+      "slug": "best-saree-designs-for-weddings-2026",
+      "category": "Wedding Sarees",
+      "summary": "Explore trending wedding saree designs, bridal colors, blouse ideas, and styling tips for a graceful wedding look.",
+      "content": "<p>Wedding saree shopping becomes easier when you choose the right fabric, color, and blouse style for the event. Silk sarees, organza sarees, georgette sarees, and embroidered designer sarees continue to be popular for weddings because they photograph beautifully and feel elegant during long functions.</p><p>For brides and wedding guests, deep maroon, rani pink, emerald green, gold, wine, and pastel peach are strong choices. Pair heavier sarees with balanced jewelry, comfortable heels, and a blouse design that fits well around the shoulders and sleeves.</p><p>At Anjali Boutique, customers can explore wedding-ready sarees for engagement, haldi, mehendi, reception, and family functions with personalized styling support.</p>",
+      "publishedAt": "2026-05-15",
+      "image": "https://images.unsplash.com/photo-1520975911200-58fb9e158b4f?auto=format&fit=crop&w=1200&q=80",
+      "alt": "Best wedding saree designs for women",
+      "keywords": ["best saree designs for wedding", "wedding sarees 2026", "bridal saree boutique", "designer sarees"]
+    },
+    {
+      "title": "Designer Saree Boutique Near Me: What to Check Before Buying",
+      "slug": "designer-saree-boutique-near-me",
+      "category": "Shopping Guide",
+      "summary": "Searching for a designer saree boutique near you? Learn how to check fabric quality, fitting support, styling, and price value.",
+      "content": "<p>When people search for a designer saree boutique near me, they usually want more than a simple saree shop. A good boutique helps with fabric selection, blouse coordination, fall and pico guidance, styling, and occasion-based recommendations.</p><p>Before buying, check the fabric feel, border finishing, color quality, blouse piece, and whether the saree suits your event timing. Lightweight sarees work well for daytime functions, while silk, satin, sequins, and embroidered sarees are better for evening events.</p><p>Anjali Boutique focuses on premium ethnic fashion, custom styling support, and comfortable shopping for wedding, festive, casual, and party wear needs.</p>",
+      "publishedAt": "2026-05-12",
+      "image": "https://images.unsplash.com/photo-1495121605193-b116b5b9c5d9?auto=format&fit=crop&w=1200&q=80",
+      "alt": "Designer saree boutique shopping guide",
+      "keywords": ["designer saree boutique near me", "saree boutique", "ladies boutique", "boutique shopping guide"]
+    },
+    {
+      "title": "How to Style Party Wear Sarees for Receptions and Birthdays",
+      "slug": "how-to-style-party-wear-sarees",
+      "category": "Style Guide",
+      "summary": "Simple party wear saree styling ideas with jewelry, blouse designs, makeup, and draping tips for modern celebrations.",
+      "content": "<p>Party wear sarees should feel stylish without becoming uncomfortable. Choose fabrics like georgette, chiffon, satin, crepe, or lightweight silk when you need easy movement for receptions, birthdays, office parties, and evening events.</p><p>For a modern look, pair a plain saree with a statement blouse or choose a shimmer saree with minimal jewelry. Keep the drape neat, use a fitted petticoat, and select earrings or bangles that match the border or blouse color.</p><p>Popular party colors include black, wine, emerald, champagne, rose gold, navy, and metallic shades. These colors look premium in photographs and suit evening lighting well.</p>",
+      "publishedAt": "2026-05-08",
+      "image": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
+      "alt": "Party wear saree styling ideas",
+      "keywords": ["party wear saree", "party saree styling", "reception saree", "birthday outfit women"]
+    },
+    {
+      "title": "Plus Size Ethnic Wear Styling Tips for a Confident Look",
+      "slug": "plus-size-ethnic-wear-styling-tips",
+      "category": "Plus Size Fashion",
+      "summary": "Practical plus-size ethnic wear tips for sarees, kurtis, festive outfits, fabrics, colors, and comfortable silhouettes.",
+      "content": "<p>Plus-size ethnic wear looks best when comfort and structure come together. Choose fabrics that drape smoothly, such as georgette, crepe, cotton silk, rayon, and soft silk blends. Avoid very stiff fabrics if you want a fluid silhouette.</p><p>V-neck, sweetheart, boat neck, and three-quarter sleeve blouse designs work well for many body types. Vertical prints, medium borders, monochrome looks, and well-fitted innerwear can make the outfit feel polished and comfortable.</p><p>The best styling rule is simple: choose the outfit that lets you move confidently. Anjali Boutique offers plus-size fashion options designed for comfort, elegance, and celebration-ready styling.</p>",
+      "publishedAt": "2026-05-05",
+      "image": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80",
+      "alt": "Plus size ethnic wear styling tips",
+      "keywords": ["plus size ethnic wear", "plus size saree styling", "plus size boutique", "fashion tips for plus size women"]
+    },
+    {
+      "title": "Festive Outfit Colors That Look Premium in Photos",
+      "slug": "festive-outfit-colors-premium-photos",
+      "category": "Festive Fashion",
+      "summary": "Choose festive outfit colors that look elegant in photos for Diwali, puja, weddings, family functions, and celebrations.",
+      "content": "<p>Festive outfit colors can completely change your look in photos. Jewel tones like emerald, ruby, royal blue, magenta, and wine look rich during evening events, while pastel peach, mint, ivory, powder blue, and blush pink work beautifully for daytime functions.</p><p>If the event has heavy decoration or bright lights, choose a balanced outfit color instead of competing with the background. Gold accessories pair well with warm shades, while silver or pearl styling works well with cool-toned outfits.</p><p>For family functions, sarees and ethnic suits in festive colors create a polished look without requiring too much styling effort.</p>",
+      "publishedAt": "2026-05-01",
+      "image": "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=1200&q=80",
+      "alt": "Festive outfit colors for women",
+      "keywords": ["festive outfit colors", "Diwali outfit women", "ethnic wear colors", "festive saree colors"]
+    },
+    {
+      "title": "Casual Ethnic Wear Ideas for Daily Comfort and Style",
+      "slug": "casual-ethnic-wear-ideas-daily-comfort",
+      "category": "Casual Wear",
+      "summary": "Daily ethnic wear ideas for women who want breathable fabrics, easy styling, and boutique elegance for regular use.",
+      "content": "<p>Casual ethnic wear should be easy to repeat, easy to wash, and comfortable for long hours. Cotton kurtis, rayon sets, light sarees, palazzo suits, and simple dupatta combinations are practical choices for everyday styling.</p><p>For daily wear, choose breathable fabrics and colors that can be mixed with multiple bottoms or dupattas. Small prints, solid colors, and minimal embroidery keep the look clean and useful for work, shopping, family visits, and casual outings.</p><p>A good boutique collection helps you build outfits that feel polished without looking overdressed.</p>",
+      "publishedAt": "2026-04-28",
+      "image": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
+      "alt": "Casual ethnic wear ideas for women",
+      "keywords": ["casual ethnic wear", "daily wear kurti", "women ethnic wear", "comfortable boutique fashion"]
+    },
+    {
+      "title": "Blouse Design Ideas for Sarees: Simple, Modern, and Wedding Ready",
+      "slug": "blouse-design-ideas-for-sarees",
+      "category": "Blouse Designs",
+      "summary": "Find blouse design ideas for wedding sarees, party sarees, silk sarees, and modern boutique outfits.",
+      "content": "<p>The blouse can make a saree look traditional, modern, festive, or minimal. For wedding sarees, embroidered sleeves, deep back necks, elbow sleeves, and contrast blouses are popular. For party wear sarees, sleeveless, halter neck, square neck, and shimmer blouses create a modern look.</p><p>When choosing a blouse design, think about comfort first. The neckline, sleeve length, padding, and back closure should support your movement during the event. A beautiful blouse that does not fit well can spoil the whole outfit.</p><p>Matching the blouse color with border work, jewelry, or accessories is a simple way to make the complete look feel premium.</p>",
+      "publishedAt": "2026-04-24",
+      "image": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=80",
+      "alt": "Blouse design ideas for sarees",
+      "keywords": ["blouse design ideas", "saree blouse designs", "wedding blouse design", "party wear blouse"]
+    },
+    {
+      "title": "Boutique Shopping Tips for Wedding Guests",
+      "slug": "boutique-shopping-tips-for-wedding-guests",
+      "category": "Wedding Guest Fashion",
+      "summary": "A practical guide for wedding guests choosing sarees, ethnic outfits, accessories, colors, and comfortable styling.",
+      "content": "<p>Wedding guests need outfits that look elegant but remain comfortable for long ceremonies. Before shopping, note the event time, venue, dress code, and how much movement the function will require. Heavy outfits look beautiful, but they should still let you sit, walk, and enjoy the event.</p><p>For daytime weddings, pastels, florals, organza, cotton silk, and light embroidery work well. For evening receptions, choose richer shades, shimmer details, silk blends, or statement jewelry. Keep footwear practical because wedding events often involve standing for long periods.</p><p>Anjali Boutique helps customers choose wedding guest outfits based on event type, budget, and personal comfort.</p>",
+      "publishedAt": "2026-04-20",
+      "image": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80",
+      "alt": "Wedding guest boutique shopping tips",
+      "keywords": ["wedding guest outfit women", "boutique shopping tips", "wedding guest saree", "ethnic wear for wedding"]
+    }
+  ],
   "serviceCards": [
     "Premium Quality Fabrics",
     "Affordable Luxury Fashion",

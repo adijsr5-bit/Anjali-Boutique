@@ -64,15 +64,41 @@ async function writeBlobJson<T>(pathname: string, data: T) {
   }
 }
 
+function mergeContentWithSeed(content: ContentData, seed: ContentData): ContentData {
+  const collectionIds = new Set(content.collections.map((item) => item.id));
+  const blogSlugs = new Set(content.blogPosts.map((item) => item.slug));
+
+  return {
+    ...seed,
+    ...content,
+    siteMetadata: {
+      ...seed.siteMetadata,
+      ...content.siteMetadata
+    },
+    collections: [
+      ...content.collections,
+      ...seed.collections.filter((item) => !collectionIds.has(item.id))
+    ],
+    blogPosts: [
+      ...content.blogPosts,
+      ...seed.blogPosts.filter((item) => !blogSlugs.has(item.slug))
+    ],
+    testimonials: content.testimonials.length > 0 ? content.testimonials : seed.testimonials,
+    faqItems: content.faqItems.length > 0 ? content.faqItems : seed.faqItems,
+    serviceCards: content.serviceCards.length > 0 ? content.serviceCards : seed.serviceCards
+  };
+}
+
 export async function getContentData(): Promise<ContentData> {
   noStore();
 
+  const seedContent = await readJson<ContentData>(contentFile);
   const blobData = await readBlobJson<ContentData>(contentBlobPath);
   if (blobData) {
-    return blobData;
+    return mergeContentWithSeed(blobData, seedContent);
   }
 
-  return readJson<ContentData>(contentFile);
+  return seedContent;
 }
 
 export async function saveContentData(data: ContentData): Promise<void> {
