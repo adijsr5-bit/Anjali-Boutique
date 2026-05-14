@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  background-color: #FFFFFF;
+  color: #1E1E1E;
+  font-family: var(--font-body), sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #FFFFFF;
+  color: #1E1E1E;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-headings), Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+a,
+input,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(139, 30, 63, 0.2);
+}
+
+.heading-shadow {
+  text-shadow: 0 3px 20px rgba(139, 30, 63, 0.12);
+}
+
+.hero-gradient {
+  background-image: radial-gradient(circle at top left, rgba(139, 30, 63, 0.08), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(212, 163, 115, 0.15), transparent 22%);
+}
+
+.card-fade {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+}

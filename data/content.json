@@ -1,0 +1,69 @@
+{
+  "siteMetadata": {
+    "title": "Anjali Boutique | Designer Sarees, Party Wear & Ethnic Fashion",
+    "description": "Explore elegant designer sarees, party wear, casual collections, plus-size fashion, and accessories at Anjali Boutique. Premium boutique fashion crafted for every occasion.",
+    "siteUrl": "https://anjaliboutique.in",
+    "contactPhone": "+91 98765 43210",
+    "contactEmail": "hello@anjaliboutique.in",
+    "whatsappNumber": "+919876543210",
+    "heroImage": "https://images.unsplash.com/photo-1495121605193-b116b5b9c5d9?auto=format&fit=crop&w=1200&q=80",
+    "heroAlt": "Elegant designer saree collection hero image"
+  },
+  "collections": [],
+  "testimonials": [
+    {
+      "rating": 5,
+      "quote": "Amazing collection and excellent fitting. The saree quality exceeded my expectations.",
+      "author": "Riya Sharma"
+    },
+    {
+      "rating": 5,
+      "quote": "Professional service and beautiful designs. Highly recommended boutique.",
+      "author": "Nisha Patel"
+    },
+    {
+      "rating": 5,
+      "quote": "The plus-size collection was elegant and comfortable. Very happy with my order.",
+      "author": "Anita Verma"
+    },
+    {
+      "rating": 5,
+      "quote": "Lovely fabrics, timely delivery, and excellent customer support. A premium experience.",
+      "author": "Sana Khan"
+    },
+    {
+      "rating": 5,
+      "quote": "Beautiful party wear outfits with detailed styling. My guests loved the look.",
+      "author": "Priya Mehta"
+    }
+  ],
+  "faqItems": [
+    {
+      "question": "Do you offer custom boutique designs?",
+      "answer": "Yes, we provide customized boutique collections based on customer preferences for bespoke events and celebrations."
+    },
+    {
+      "question": "Do you deliver across India?",
+      "answer": "Yes, we offer delivery services across multiple cities and states in India for a seamless boutique experience."
+    },
+    {
+      "question": "Can I order through WhatsApp?",
+      "answer": "Yes, customers can contact us directly through WhatsApp for inquiries, custom orders, and quick support."
+    },
+    {
+      "question": "Do you have plus-size collections?",
+      "answer": "Yes, we offer stylish and comfortable plus-size fashion collections designed to celebrate every body type."
+    }
+  ],
+  "blogPosts": [],
+  "serviceCards": [
+    "Premium Quality Fabrics",
+    "Affordable Luxury Fashion",
+    "Trendy & Traditional Collections",
+    "Customer Satisfaction Focused",
+    "Smooth Shopping Experience",
+    "Fast Customer Support",
+    "Mobile Friendly Website",
+    "Secure Checkout System"
+  ]
+}
