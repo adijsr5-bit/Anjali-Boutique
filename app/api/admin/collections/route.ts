@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getContentData, saveContentData } from '../../../../lib/data';
 import { verifyAdminToken } from '../../../../lib/adminAuth';
 
+function errorMessage(error: unknown) {
+  return error instanceof Error ? error.message : 'Collection save failed';
+}
+
 export async function GET(request: NextRequest) {
   const token = request.cookies.get('admin-auth')?.value;
   if (!verifyAdminToken(token)) {
@@ -17,29 +21,34 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const body = await request.json().catch(() => null);
-  if (!body || !body.title || !body.id) {
-    return NextResponse.json({ error: 'Collection title and id are required' }, { status: 400 });
+  try {
+    const body = await request.json().catch(() => null);
+    if (!body || !body.title || !body.id) {
+      return NextResponse.json({ error: 'Collection title and id are required' }, { status: 400 });
+    }
+
+    const content = await getContentData();
+    const existingIndex = content.collections.findIndex((item) => item.id === body.id);
+    const updatedCollection = {
+      id: String(body.id),
+      title: String(body.title),
+      description: String(body.description || ''),
+      image: String(body.image || ''),
+      alt: String(body.alt || '')
+    };
+
+    if (existingIndex >= 0) {
+      content.collections[existingIndex] = updatedCollection;
+    } else {
+      content.collections.unshift(updatedCollection);
+    }
+
+    await saveContentData(content);
+    return NextResponse.json({ collections: content.collections });
+  } catch (error) {
+    console.error('Collection save error:', error);
+    return NextResponse.json({ error: errorMessage(error) }, { status: 500 });
   }
-
-  const content = await getContentData();
-  const existingIndex = content.collections.findIndex((item) => item.id === body.id);
-  const updatedCollection = {
-    id: String(body.id),
-    title: String(body.title),
-    description: String(body.description || ''),
-    image: String(body.image || ''),
-    alt: String(body.alt || '')
-  };
-
-  if (existingIndex >= 0) {
-    content.collections[existingIndex] = updatedCollection;
-  } else {
-    content.collections.unshift(updatedCollection);
-  }
-
-  await saveContentData(content);
-  return NextResponse.json({ collections: content.collections });
 }
 
 export async function DELETE(request: NextRequest) {
@@ -53,8 +62,13 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ error: 'Collection id is required' }, { status: 400 });
   }
 
-  const content = await getContentData();
-  content.collections = content.collections.filter((item) => item.id !== id);
-  await saveContentData(content);
-  return NextResponse.json({ collections: content.collections });
+  try {
+    const content = await getContentData();
+    content.collections = content.collections.filter((item) => item.id !== id);
+    await saveContentData(content);
+    return NextResponse.json({ collections: content.collections });
+  } catch (error) {
+    console.error('Collection delete error:', error);
+    return NextResponse.json({ error: errorMessage(error) }, { status: 500 });
+  }
 }

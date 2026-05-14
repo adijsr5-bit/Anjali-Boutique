@@ -93,7 +93,8 @@ export default function BlogsTab() {
 
     setSaving(false);
     if (!response.ok) {
-      alert('Blog save failed');
+      const error = await response.json().catch(() => null);
+      alert(error?.error || 'Blog save failed');
       return;
     }
 

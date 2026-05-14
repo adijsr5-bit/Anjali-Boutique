@@ -13,6 +13,16 @@ function hasBlobStorage() {
   return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
 }
 
+function isVercel() {
+  return Boolean(process.env.VERCEL);
+}
+
+function assertWritableStorageConfigured() {
+  if (isVercel() && !hasBlobStorage()) {
+    throw new Error('Vercel Blob is not configured. Add BLOB_READ_WRITE_TOKEN in Vercel environment variables.');
+  }
+}
+
 async function readJson<T>(filePath: string): Promise<T> {
   const fileContents = await fs.readFile(filePath, 'utf8');
   return JSON.parse(fileContents) as T;
@@ -60,6 +70,7 @@ export async function saveContentData(data: ContentData): Promise<void> {
     return;
   }
 
+  assertWritableStorageConfigured();
   await writeJson(contentFile, data);
 }
 
@@ -80,6 +91,7 @@ export async function saveMessages(messages: Message[]): Promise<void> {
     return;
   }
 
+  assertWritableStorageConfigured();
   await writeJson(messagesFile, messages);
 }
 

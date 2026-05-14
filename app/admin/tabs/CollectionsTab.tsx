@@ -73,7 +73,8 @@ export default function CollectionsTab() {
 
     setSaving(false);
     if (!response.ok) {
-      alert('Collection save failed');
+      const error = await response.json().catch(() => null);
+      alert(error?.error || 'Collection save failed');
       return;
     }
 
