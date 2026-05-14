@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyAdminToken } from '../../../../lib/adminAuth';
+import { put } from '@vercel/blob';
 import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
@@ -29,12 +30,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'File too large. Max 5MB.' }, { status: 400 });
     }
 
-    // Create uploads directory if it doesn't exist
-    const uploadsDir = join(process.cwd(), 'public', 'uploads');
-    if (!existsSync(uploadsDir)) {
-      await mkdir(uploadsDir, { recursive: true });
-    }
-
     const extensionByType: Record<string, string> = {
       'image/jpeg': 'jpg',
       'image/png': 'png',
@@ -47,10 +42,36 @@ export async function POST(request: NextRequest) {
     const random = Math.random().toString(36).substring(7);
     const ext = extensionByType[file.type];
     const filename = `${timestamp}-${random}.${ext}`;
-
-    // Save file
-    const filepath = join(uploadsDir, filename);
     const bytes = await file.arrayBuffer();
+
+    if (process.env.BLOB_READ_WRITE_TOKEN) {
+      const blob = await put(`uploads/${filename}`, bytes, {
+        access: 'public',
+        addRandomSuffix: false,
+        contentType: file.type
+      });
+
+      return NextResponse.json({
+        success: true,
+        imageUrl: blob.url,
+        filename
+      });
+    }
+
+    if (process.env.VERCEL) {
+      return NextResponse.json(
+        { error: 'Vercel Blob is not configured. Add BLOB_READ_WRITE_TOKEN in Vercel environment variables.' },
+        { status: 500 }
+      );
+    }
+
+    // Local development fallback.
+    const uploadsDir = join(process.cwd(), 'public', 'uploads');
+    if (!existsSync(uploadsDir)) {
+      await mkdir(uploadsDir, { recursive: true });
+    }
+
+    const filepath = join(uploadsDir, filename);
     await writeFile(filepath, Buffer.from(bytes));
 
     // Return public URL

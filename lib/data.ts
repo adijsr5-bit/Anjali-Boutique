@@ -1,9 +1,17 @@
 import fs from 'fs/promises';
 import path from 'path';
+import { get, put } from '@vercel/blob';
+import { unstable_noStore as noStore } from 'next/cache';
 import type { Collection, ContentData, Message, SiteMetadata } from './content';
 
 const contentFile = path.join(process.cwd(), 'data', 'content.json');
 const messagesFile = path.join(process.cwd(), 'data', 'messages.json');
+const contentBlobPath = process.env.CONTENT_BLOB_PATH || 'admin/content.json';
+const messagesBlobPath = process.env.MESSAGES_BLOB_PATH || 'admin/messages.json';
+
+function hasBlobStorage() {
+  return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+}
 
 async function readJson<T>(filePath: string): Promise<T> {
   const fileContents = await fs.readFile(filePath, 'utf8');
@@ -14,19 +22,64 @@ async function writeJson<T>(filePath: string, data: T) {
   await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf8');
 }
 
+async function readBlobJson<T>(pathname: string): Promise<T | null> {
+  if (!hasBlobStorage()) {
+    return null;
+  }
+
+  const blob = await get(pathname, { access: 'private', useCache: false });
+  if (!blob || blob.statusCode !== 200 || !blob.stream) {
+    return null;
+  }
+
+  return new Response(blob.stream).json() as Promise<T>;
+}
+
+async function writeBlobJson<T>(pathname: string, data: T) {
+  await put(pathname, JSON.stringify(data, null, 2), {
+    access: 'private',
+    allowOverwrite: true,
+    contentType: 'application/json'
+  });
+}
+
 export async function getContentData(): Promise<ContentData> {
+  noStore();
+
+  const blobData = await readBlobJson<ContentData>(contentBlobPath);
+  if (blobData) {
+    return blobData;
+  }
+
   return readJson<ContentData>(contentFile);
 }
 
 export async function saveContentData(data: ContentData): Promise<void> {
+  if (hasBlobStorage()) {
+    await writeBlobJson(contentBlobPath, data);
+    return;
+  }
+
   await writeJson(contentFile, data);
 }
 
 export async function getMessages(): Promise<Message[]> {
+  noStore();
+
+  const blobData = await readBlobJson<Message[]>(messagesBlobPath);
+  if (blobData) {
+    return blobData;
+  }
+
   return readJson<Message[]>(messagesFile);
 }
 
 export async function saveMessages(messages: Message[]): Promise<void> {
+  if (hasBlobStorage()) {
+    await writeBlobJson(messagesBlobPath, messages);
+    return;
+  }
+
   await writeJson(messagesFile, messages);
 }
 
