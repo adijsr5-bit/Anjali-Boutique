@@ -37,9 +37,8 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // Use static data initially to avoid blocking render
-  const contentData = { siteMetadata: defaultSiteMetadata };
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const contentData = await getContentData();
 
   const structuredData = {
     '@context': 'https://schema.org',

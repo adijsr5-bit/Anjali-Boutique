@@ -1,29 +1,41 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ContactMessage, getMessages, markMessageAsRead, deleteMessage } from '../../../lib/adminStorage';
+import type { Message } from '../../../lib/content';
 
 export default function MessagesTab() {
-  const [messages, setMessages] = useState<ContactMessage[]>([]);
-  const [selectedMsg, setSelectedMsg] = useState<ContactMessage | null>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [selectedMsg, setSelectedMsg] = useState<Message | null>(null);
 
   useEffect(() => {
     loadMessages();
   }, []);
 
   async function loadMessages() {
-    const msgs = await getMessages();
+    const response = await fetch('/api/admin/messages', { cache: 'no-store' });
+    if (!response.ok) return;
+    const data = await response.json();
+    const msgs = (data.messages || []) as Message[];
     setMessages(msgs.sort((a, b) => new Date(b.receivedAt).getTime() - new Date(a.receivedAt).getTime()));
   }
 
   async function handleMarkRead(id: string) {
-    await markMessageAsRead(id);
-    loadMessages();
+    const response = await fetch('/api/admin/messages', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+      cache: 'no-store'
+    });
+    if (!response.ok) return;
+    await loadMessages();
   }
 
   async function handleDelete(id: string) {
     if (confirm('Delete this message?')) {
-      await deleteMessage(id);
+      await fetch(`/api/admin/messages?id=${encodeURIComponent(id)}`, {
+        method: 'DELETE',
+        cache: 'no-store'
+      });
       setSelectedMsg(null);
       loadMessages();
     }
@@ -44,7 +56,10 @@ export default function MessagesTab() {
           messages.map((msg) => (
             <button
               key={msg.id}
-              onClick={() => handleMarkRead(msg.id).then(() => setSelectedMsg(msg))}
+              onClick={() => {
+                setSelectedMsg({ ...msg, read: true });
+                if (!msg.read) handleMarkRead(msg.id);
+              }}
               className={`w-full rounded-lg p-3 text-left transition ${
                 msg.read ? 'border border-zinc-200 bg-white' : 'border-l-4 border-l-primary bg-primary/5'
               }`}

@@ -55,6 +55,7 @@ export type Message = {
   email: string;
   message: string;
   receivedAt: string;
+  read?: boolean;
 };
 
 export const siteMetadata = {

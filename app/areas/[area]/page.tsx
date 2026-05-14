@@ -1,6 +1,4 @@
-import Link from 'next/link';
-import SectionHeader from '../../../components/SectionHeader';
-import { siteMetadata } from '../../../lib/content';
+import { getContentData } from '../../../lib/data';
 
 /**
  * TEMPLATE LOCAL SEO PAGE
@@ -43,7 +41,9 @@ export const metadata = {
   keywords: areaKeywords.join(', ')
 };
 
-export default function LocalAreaPage() {
+export default async function LocalAreaPage() {
+  const { siteMetadata } = await getContentData();
+
   return (
     <>
       <section className="bg-secondary px-4 py-16 sm:px-6 lg:px-8">

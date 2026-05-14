@@ -26,6 +26,11 @@ export default function HomePage() {
     blogPosts: defaultBlogPosts,
     serviceCards: defaultServiceCards
   });
+  const [contactName, setContactName] = useState('');
+  const [contactEmail, setContactEmail] = useState('');
+  const [contactMessage, setContactMessage] = useState('');
+  const [contactStatus, setContactStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [contactError, setContactError] = useState('');
 
   useEffect(() => {
     let active = true;
@@ -50,6 +55,31 @@ export default function HomePage() {
   }, []);
 
   const { siteMetadata, collections, testimonials, faqItems, blogPosts, serviceCards } = content;
+
+  async function handleContactSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setContactStatus('sending');
+    setContactError('');
+
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: contactName, email: contactEmail, message: contactMessage }),
+      cache: 'no-store'
+    });
+
+    if (response.ok) {
+      setContactStatus('success');
+      setContactName('');
+      setContactEmail('');
+      setContactMessage('');
+      return;
+    }
+
+    const body = await response.json().catch(() => null);
+    setContactStatus('error');
+    setContactError(body?.error || 'We could not submit your message. Please try again.');
+  }
 
   return (
     <div className="overflow-hidden">
@@ -218,22 +248,49 @@ export default function HomePage() {
               </div>
             </div>
             <div className="rounded-[36px] bg-white/10 p-8 backdrop-blur-xl">
-              <form className="space-y-4">
+              <form onSubmit={handleContactSubmit} className="space-y-4">
                 <div>
                   <label className="text-sm font-medium text-white">Name</label>
-                  <input type="text" placeholder="Your name" className="mt-2 w-full rounded-full border border-white/30 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/60" />
+                  <input
+                    type="text"
+                    placeholder="Your name"
+                    value={contactName}
+                    onChange={(event) => setContactName(event.target.value)}
+                    className="mt-2 w-full rounded-full border border-white/30 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/60"
+                    required
+                  />
                 </div>
                 <div>
                   <label className="text-sm font-medium text-white">Email</label>
-                  <input type="email" placeholder="name@example.com" className="mt-2 w-full rounded-full border border-white/30 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/60" />
+                  <input
+                    type="email"
+                    placeholder="name@example.com"
+                    value={contactEmail}
+                    onChange={(event) => setContactEmail(event.target.value)}
+                    className="mt-2 w-full rounded-full border border-white/30 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/60"
+                    required
+                  />
                 </div>
                 <div>
                   <label className="text-sm font-medium text-white">Message</label>
-                  <textarea placeholder="Tell us about your boutique needs" rows={4} className="mt-2 w-full rounded-[24px] border border-white/30 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/60" />
+                  <textarea
+                    placeholder="Tell us about your boutique needs"
+                    rows={4}
+                    value={contactMessage}
+                    onChange={(event) => setContactMessage(event.target.value)}
+                    className="mt-2 w-full rounded-[24px] border border-white/30 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/60"
+                    required
+                  />
                 </div>
-                <button type="submit" className="inline-flex w-full items-center justify-center rounded-full bg-[#F8EDEB] px-6 py-3 text-sm font-semibold text-primary transition hover:bg-white/90">
-                  Send Inquiry
+                <button
+                  type="submit"
+                  disabled={contactStatus === 'sending'}
+                  className="inline-flex w-full items-center justify-center rounded-full bg-[#F8EDEB] px-6 py-3 text-sm font-semibold text-primary transition hover:bg-white/90 disabled:opacity-60"
+                >
+                  {contactStatus === 'sending' ? 'Sending...' : 'Send Inquiry'}
                 </button>
+                {contactStatus === 'success' && <p className="text-sm text-[#F8EDEB]">Your message was sent successfully.</p>}
+                {contactStatus === 'error' && <p className="text-sm text-red-100">{contactError}</p>}
               </form>
             </div>
           </div>

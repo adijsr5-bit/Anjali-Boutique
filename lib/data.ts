@@ -137,11 +137,19 @@ export async function addMessage(message: Omit<Message, 'id' | 'receivedAt'>): P
   const newMessage: Message = {
     ...message,
     id: `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`,
-    receivedAt: new Date().toISOString()
+    receivedAt: new Date().toISOString(),
+    read: false
   };
   messages.unshift(newMessage);
   await saveMessages(messages);
   return newMessage;
+}
+
+export async function markMessageAsRead(id: string): Promise<Message[]> {
+  const messages = await getMessages();
+  const updated = messages.map((message) => (message.id === id ? { ...message, read: true } : message));
+  await saveMessages(updated);
+  return updated;
 }
 
 export async function deleteMessage(id: string): Promise<Message[]> {

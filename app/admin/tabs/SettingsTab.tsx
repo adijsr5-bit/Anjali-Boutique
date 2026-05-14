@@ -84,11 +84,15 @@ export default function SettingsTab() {
       });
 
       if (response.ok) {
-        localStorage.setItem('site_settings', JSON.stringify(formData));
+        const data = await response.json();
+        if (data.siteMetadata) {
+          setFormData((current) => ({ ...current, ...data.siteMetadata }));
+        }
         setSaved(true);
         setTimeout(() => setSaved(false), 3000);
       } else {
-        alert('Error saving settings');
+        const error = await response.json().catch(() => null);
+        alert(error?.error || 'Error saving settings');
       }
     } catch (error) {
       console.error('Error saving settings:', error);
