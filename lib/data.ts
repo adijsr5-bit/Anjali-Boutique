@@ -37,20 +37,31 @@ async function readBlobJson<T>(pathname: string): Promise<T | null> {
     return null;
   }
 
-  const blob = await get(pathname, { access: 'private', useCache: false });
-  if (!blob || blob.statusCode !== 200 || !blob.stream) {
+  try {
+    const blob = await get(pathname, { access: 'public' });
+    if (!blob || blob.statusCode !== 200 || !blob.stream) {
+      return null;
+    }
+
+    return new Response(blob.stream).json() as Promise<T>;
+  } catch (error) {
+    console.warn(`Blob read skipped for ${pathname}:`, error);
     return null;
   }
-
-  return new Response(blob.stream).json() as Promise<T>;
 }
 
 async function writeBlobJson<T>(pathname: string, data: T) {
-  await put(pathname, JSON.stringify(data, null, 2), {
-    access: 'private',
-    allowOverwrite: true,
-    contentType: 'application/json'
-  });
+  try {
+    await put(pathname, JSON.stringify(data, null, 2), {
+      access: 'public',
+      allowOverwrite: true,
+      contentType: 'application/json',
+      cacheControlMaxAge: 60
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown Vercel Blob error';
+    throw new Error(`Vercel Blob write failed: ${message}`);
+  }
 }
 
 export async function getContentData(): Promise<ContentData> {
