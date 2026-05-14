@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
 import AdsenseScript from '../components/AdsenseScript';
 import LoadingScreen from '../components/LoadingScreen';
+import CookieConsent from '../components/CookieConsent';
 import { getContentData } from '../lib/data';
 import { siteMetadata as defaultSiteMetadata } from '../lib/content';
 
@@ -84,6 +85,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <main>{children}</main>
         <Footer siteMetadata={contentData.siteMetadata} />
         <WhatsAppButton whatsappNumber={contentData.siteMetadata.whatsappNumber} />
+        <CookieConsent />
         <AdsenseScript />
         <Script id="structured-schema" type="application/ld+json">
           {JSON.stringify(structuredData)}
